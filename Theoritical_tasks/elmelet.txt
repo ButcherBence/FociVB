@@ -1,0 +1,92 @@
+Elmélet 1. feladat:
+
+Mi a különbség az Exception és a RuntimeException között?
+    A RuntimeException egy Unchecked Exception
+    A runtime exceptionök olyan speciális Java standard kivételek, amelyeket nem kell külön megadni a kivétel specifikációban.
+    Azon kivételek őse lesz, amit a virtuális gép dobhat normális működés közben.
+    Például ezek a NullPointerException, ClassCastException, IndexOutOfBoundsException.
+    Az, hogy ezeket a kivételeket nem kell a metódusok specifikációjában feltüntetni azért van,
+    mert szinte minden metódusról feltételezhetőek, hogy dobhatnak ilyen típusú kivételeket.
+
+Hogyan kell őket használni?
+    try {
+    ( esetleges hibák )
+    } catch (Exception e) {
+    (egy vezérlési ág egy bizonyos hiba esetén a try-blokkban)
+    } finally {
+    (biztosan lefut, hibától függetlenül)
+
+Mire érdemes figyelni a kezelésüknél?
+    Az alosztályok felülbírálják a szülőosztály metódusait,
+    A kidobott kivételtípus csak a felülbírált metódus kivételosztályának egy alosztálya lehet, vagy önmagában.
+    A try-catch hatására a programunk nem áll le természetesen feltéve, hogy jól kezeltük a hibát.
+
+
+
+Elmélet 2. feladat:
+
+Hogyan tudunk egy kollekcióból bejárás közben elemetket törölni?
+ -> Egy elem eltávolítható a gyűjteményből az Iterator remove() metódussal.
+ Ez a módszer eltávolítja az aktuális elemet a gyűjteményből.
+
+ Példa az iterátoros elem törtlésre:
+
+ Iterator<Result> iterator = results.iterator();
+
+             while (iterator.hasNext()) {
+                 // éppen bejárt érték lekérdezése
+                 Result result = iterator.next();
+
+                 if (result.getPercentage() != 100) {
+                     iterator.remove();
+                 }
+             }
+
+ Elmélet 3. feladat:
+
+ OOP koncepciói:
+
+ absztrakció(abstraction):
+   Az absztrakció az a folyamat, amelyben csak a „releváns” adatokat jeleníti meg,
+   és „elrejti” a szükségtelen részleteket a felhasználó elől.
+   Az absztrakció egy nagyobb készletből választja ki az adatokat,
+   hogy csak az objektum releváns részleteit jelenítse meg a felhasználó számára.
+   Segít csökkenteni a programozás összetettségét és erőfeszítéseit
+
+
+ enkapszuláció(encapsulation):
+   Az adatok összerendelése az azokat módosító kóddal.
+   Biztonságban tartja az adatokat és a kódot a külső interfészektől.
+   Ami (logikailag) összetartozik, mindaz egy egységet képez.
+   Az egység a saját dolgáért felelős, a saját feladatát végzi,
+   Az egység nem látja azt más egységekből, ami nem rá tartozik - és
+   az ő dolgait sem látják mások.
+
+ öröklődés(inheritance):
+   Ez az a mechanizmus, amellyel egy objektum elnyeri egy másik objektum tulajdonságait.
+   Vagyis egy osztály öröklődik egy másik osztályból.
+   A cél a kód újrafelhasználhatóságának biztosítása. Így egy osztálynak csak az egyedi jellemzőket kell írnia,
+   és a többi közös tulajdonság és funkcionalitás kiterjeszthető a másik osztályból.
+   A Java nem támogatja többszörös öröklődést, tehát egy gyerekosztálynak nem lehet több anyaosztálya.
+   Lánc öröklődés lehetséges PL -> Nagyanyaosztály->Anyaosztály->Gyerekosztály
+
+ többalakúság(polymorphism):
+   Több metódus létezik ugyanazzal a névvel, mégis mindegyikük különböző
+   módon viselkedik, vagy más eredményt ad.
+   Megvalósítása: Overloading, Overriding
+   pl:
+   public void addNumbers (int num1, int num2){...}
+   public void addNumbers (int num1, int num2, int num3){...}
+
+ Elmélet 4. feladat:
+
+   Milyen adatszerkezet segítségével lehetne a gyakorlati feladatok alatt
+   beolvasott meccsek adatait mindig dátum szerint rendezett sorrendben
+   tárolni? --> Mappel azon belül is TreeMappel
+
+   Mit kellene a meccsek adatait tároló osztálynál változtatni, hogy képes
+   legyen az adatszerkezettel együttműködni?   -->
+   Comparable -é kellene tenni az osztályt utána pedig létrehozni benne a CompareTo
+   metódust.
+
+
